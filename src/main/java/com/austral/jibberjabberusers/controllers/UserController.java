@@ -1,6 +1,7 @@
 package com.austral.jibberjabberusers.controllers;
 
 import com.austral.jibberjabberusers.dto.CreateUserDto;
+import com.austral.jibberjabberusers.dto.FollowUserRequestDto;
 import com.austral.jibberjabberusers.dto.ReducedUserDto;
 import com.austral.jibberjabberusers.dto.UserListingDto;
 import com.austral.jibberjabberusers.services.UserService;
@@ -41,5 +42,15 @@ public class UserController {
     @GetMapping("/by-username/{username}")
     public ReducedUserDto findByUsername(@PathVariable String username) {
         return userService.findByUsername(username);
+    }
+
+    @PostMapping("/follow")
+    public void followUser(@RequestBody FollowUserRequestDto followUserRequestDto) {
+        userService.followUser(followUserRequestDto);
+    }
+
+    @PostMapping("/unfollow")
+    public void unfollowUser(@RequestBody FollowUserRequestDto followUserRequestDto) {
+        userService.unfollowUser(followUserRequestDto);
     }
 }

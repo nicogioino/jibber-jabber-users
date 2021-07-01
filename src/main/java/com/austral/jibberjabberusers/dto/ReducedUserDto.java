@@ -20,7 +20,19 @@ public class ReducedUserDto {
 
     private String email;
 
+    private int followersCount;
+
+    private int followingCount;
+
     public static ReducedUserDto fromUser(AppUser appUser) {
-        return new ReducedUserDto(appUser.getId(), appUser.getFirstName(), appUser.getLastName(), appUser.getUsername(), appUser.getEmail());
+        return new ReducedUserDto(
+                appUser.getId(),
+                appUser.getFirstName(),
+                appUser.getLastName(),
+                appUser.getUsername(),
+                appUser.getEmail(),
+                appUser.getFollowers().size(),
+                appUser.getFollowing().size()
+        );
     }
 }
