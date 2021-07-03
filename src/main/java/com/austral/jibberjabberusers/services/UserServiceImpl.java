@@ -1,9 +1,6 @@
 package com.austral.jibberjabberusers.services;
 
-import com.austral.jibberjabberusers.dto.CreateUserDto;
-import com.austral.jibberjabberusers.dto.FollowUserRequestDto;
-import com.austral.jibberjabberusers.dto.ReducedUserDto;
-import com.austral.jibberjabberusers.dto.UserListingDto;
+import com.austral.jibberjabberusers.dto.*;
 import com.austral.jibberjabberusers.exceptions.BadRequestException;
 import com.austral.jibberjabberusers.models.AppUser;
 import com.austral.jibberjabberusers.repositories.UserRepository;
@@ -11,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -91,5 +89,12 @@ public class UserServiceImpl implements UserService{
 
         userRepository.save(loggedUser);
         userRepository.save(userToUnfollow);
+    }
+
+    @Override
+    public FollowingIdsDto getFollowingIds(String userId) {
+        AppUser user = userRepository.findByUsername(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return new FollowingIdsDto(user.getFollowing());
     }
 }

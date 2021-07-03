@@ -1,9 +1,9 @@
 package com.austral.jibberjabberusers.services;
 
-import com.austral.jibberjabberusers.dto.CreateUserDto;
-import com.austral.jibberjabberusers.dto.FollowUserRequestDto;
-import com.austral.jibberjabberusers.dto.ReducedUserDto;
-import com.austral.jibberjabberusers.dto.UserListingDto;
+import com.austral.jibberjabberusers.dto.*;
+
+import java.util.List;
+import java.util.Set;
 
 public interface UserService {
 
@@ -20,5 +20,7 @@ public interface UserService {
     void followUser(FollowUserRequestDto followUserRequestDto);
 
     void unfollowUser(FollowUserRequestDto followUserRequestDto);
+
+    FollowingIdsDto getFollowingIds(String userId);
 
 }
