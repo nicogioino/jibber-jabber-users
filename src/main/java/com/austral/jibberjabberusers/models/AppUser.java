@@ -46,6 +46,7 @@ public class AppUser {
         this.password = password;
         this.email = email;
         this.followers = new HashSet<>();
+        this.following = new HashSet<>();
     }
 
     public void addFollower(String userId) {
