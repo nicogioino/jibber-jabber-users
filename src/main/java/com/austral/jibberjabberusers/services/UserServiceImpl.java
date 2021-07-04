@@ -65,9 +65,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void followUser(FollowUserRequestDto followUserRequestDto) {
-        AppUser loggedUser = userRepository.findByUsername(followUserRequestDto.getLoggedUserId())
+        AppUser loggedUser = userRepository.findById(followUserRequestDto.getLoggedUserId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        AppUser userToFollow = userRepository.findByUsername(followUserRequestDto.getFollowRequestId())
+        AppUser userToFollow = userRepository.findById(followUserRequestDto.getFollowRequestId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         userToFollow.addFollower(loggedUser.getId());
@@ -79,9 +79,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void unfollowUser(FollowUserRequestDto followUserRequestDto) {
-        AppUser loggedUser = userRepository.findByUsername(followUserRequestDto.getLoggedUserId())
+        AppUser loggedUser = userRepository.findById(followUserRequestDto.getLoggedUserId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        AppUser userToUnfollow = userRepository.findByUsername(followUserRequestDto.getFollowRequestId())
+        AppUser userToUnfollow = userRepository.findById(followUserRequestDto.getFollowRequestId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         userToUnfollow.removeFollower(loggedUser.getId());
@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public FollowingIdsDto getFollowingIds(String userId) {
-        AppUser user = userRepository.findByUsername(userId)
+        AppUser user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         return new FollowingIdsDto(user.getFollowing());
     }
