@@ -13,7 +13,7 @@ public interface UserService {
 
     UserListingDto getAllUsers();
 
-    ReducedUserDto editUser(ReducedUserDto updatedUser, String userId);
+    ReducedUserDto editUser(EditUserDto editUserDto, String userId);
 
     ReducedUserDto findByUsername(String username);
 
