@@ -40,8 +40,8 @@ public class UserController {
     }
 
     @GetMapping("/by-username/{username}")
-    public ReducedUserDto findByUsername(@PathVariable String username) {
-        return userService.findByUsername(username);
+    public UserProfileDto findByUsername(@PathVariable String username, @RequestHeader("userId") String userId) {
+        return userService.findByUsername(username,userId);
     }
 
     @PostMapping("/follow")

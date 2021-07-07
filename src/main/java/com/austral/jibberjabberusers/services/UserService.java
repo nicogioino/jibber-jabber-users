@@ -15,7 +15,7 @@ public interface UserService {
 
     ReducedUserDto editUser(EditUserDto editUserDto, String userId);
 
-    ReducedUserDto findByUsername(String username);
+    UserProfileDto findByUsername(String username, String loggedUserId);
 
     void followUser(FollowUserRequestDto followUserRequestDto);
 

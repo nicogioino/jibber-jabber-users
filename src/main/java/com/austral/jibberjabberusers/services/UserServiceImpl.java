@@ -59,9 +59,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public ReducedUserDto findByUsername(String username) {
+    public UserProfileDto findByUsername(String username, String loggedUserId) {
         AppUser appUser = userRepository.findByUsername(username).orElseThrow(() -> new IllegalArgumentException("User not found"));
-        return ReducedUserDto.fromUser(appUser);
+        AppUser loggedUser =  userRepository.findById(loggedUserId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        boolean following = loggedUser.getFollowing().contains(appUser.getId());
+        return UserProfileDto.fromUser(appUser, following);
     }
 
     @Override
