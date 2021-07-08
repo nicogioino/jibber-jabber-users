@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
         List<AppUser> appUsers = userRepository.findAll();
         List<ReducedUserWithFollowingDto> users = new ArrayList<>();
         for (AppUser user: appUsers) {
-            boolean isFollowing = user.getFollowing().contains(user.getId());
+            boolean isFollowing = appUser.getFollowing().contains(user.getId());
             users.add(ReducedUserWithFollowingDto.fromUser(user,isFollowing));
         }
         return UserListingDto.fromUsersList(users);
