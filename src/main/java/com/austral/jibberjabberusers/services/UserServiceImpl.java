@@ -45,9 +45,9 @@ public class UserServiceImpl implements UserService{
         AppUser appUser = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("User not found"));
         List<AppUser> appUsers = userRepository.findAll();
         List<ReducedUserWithFollowingDto> users = new ArrayList<>();
-        for (AppUser appuser: appUsers) {
-            boolean isFollowing = appuser.getFollowing().contains(appuser.getId());
-            users.add(ReducedUserWithFollowingDto.fromUser(appUser,isFollowing));
+        for (AppUser user: appUsers) {
+            boolean isFollowing = user.getFollowing().contains(user.getId());
+            users.add(ReducedUserWithFollowingDto.fromUser(user,isFollowing));
         }
         return UserListingDto.fromUsersList(users);
     }
