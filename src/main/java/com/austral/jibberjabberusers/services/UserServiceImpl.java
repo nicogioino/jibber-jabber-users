@@ -46,13 +46,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public ReducedUserDto editUser(EditUserDto editUserDto, String userId) {
+    public ReducedUserDto editUser(ReducedUserDto editUserDto, String userId) {
         AppUser appUser = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
         appUser.setEmail(editUserDto.getEmail());
         appUser.setFirstName(editUserDto.getFirstName());
         appUser.setLastName(editUserDto.getLastName());
         appUser.setUsername(editUserDto.getUsername());
-        appUser.setPassword(editUserDto.getPassword());
         AppUser savedUser = userRepository.save(appUser);
 
         return ReducedUserDto.fromUser(savedUser);
@@ -99,5 +98,13 @@ public class UserServiceImpl implements UserService{
         AppUser user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         return new FollowingIdsDto(user.getFollowing());
+    }
+
+    @Override
+    public void editPassword(EditPasswordDto editPasswordDto,String userId) {
+        AppUser user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        user.setPassword(editPasswordDto.getPassword());
+        userRepository.save(user);
     }
 }

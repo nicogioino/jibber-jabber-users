@@ -35,8 +35,13 @@ public class UserController {
     }
 
     @PostMapping("/edit/{userId}")
-    public ReducedUserDto editUser(@RequestBody EditUserDto editUserDto, @PathVariable String userId) {
+    public ReducedUserDto editUser(@RequestBody ReducedUserDto editUserDto, @PathVariable String userId) {
         return userService.editUser(editUserDto,userId);
+    }
+
+    @PostMapping("/edit/password/{userId}")
+    public void editPassword(@RequestBody EditPasswordDto editPasswordDto, @PathVariable String userId) {
+        userService.editPassword(editPasswordDto,userId);
     }
 
     @GetMapping("/by-username/{username}")

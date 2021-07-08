@@ -13,7 +13,7 @@ public interface UserService {
 
     UserListingDto getAllUsers();
 
-    ReducedUserDto editUser(EditUserDto editUserDto, String userId);
+    ReducedUserDto editUser(ReducedUserDto editUserDto, String userId);
 
     UserProfileDto findByUsername(String username, String loggedUserId);
 
@@ -23,4 +23,5 @@ public interface UserService {
 
     FollowingIdsDto getFollowingIds(String userId);
 
+    void editPassword(EditPasswordDto editPasswordDto,String userId);
 }
