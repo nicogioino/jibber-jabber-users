@@ -24,6 +24,11 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
+    @GetMapping("/by-id/{id}")
+    public UserProfileDto findById(@PathVariable String id, @RequestHeader("userId") String loggedId) {
+        return userService.findById(id,loggedId);
+    }
+
     @GetMapping("/get-all")
     public UserListingDto getAllUsers( @RequestHeader("userId") String userId) {
         return userService.getAllUsers(userId);

@@ -24,4 +24,6 @@ public interface UserService {
     FollowingIdsDto getFollowingIds(String userId);
 
     void editPassword(EditPasswordDto editPasswordDto,String userId);
+
+    UserProfileDto findById(String id, String userId);
 }

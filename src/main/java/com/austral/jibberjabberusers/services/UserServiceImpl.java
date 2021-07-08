@@ -114,4 +114,12 @@ public class UserServiceImpl implements UserService{
         user.setPassword(editPasswordDto.getPassword());
         userRepository.save(user);
     }
+
+    @Override
+    public UserProfileDto findById(String id, String loggedId) {
+        AppUser appUser = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        AppUser loggedUser =  userRepository.findById(loggedId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        boolean following = loggedUser.getFollowing().contains(appUser.getId());
+        return UserProfileDto.fromUser(appUser, following);
+    }
 }
