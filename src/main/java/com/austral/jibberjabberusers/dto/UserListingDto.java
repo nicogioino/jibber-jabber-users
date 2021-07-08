@@ -13,10 +13,9 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class UserListingDto {
 
-    List<ReducedUserDto> users;
+    List<ReducedUserWithFollowingDto> users;
 
-    public static UserListingDto fromUsersList (List<AppUser> appUsers) {
-        List<ReducedUserDto> userDtos =  appUsers.stream().map(ReducedUserDto::fromUser).collect(Collectors.toList());
-        return new UserListingDto(userDtos);
+    public static UserListingDto fromUsersList (List<ReducedUserWithFollowingDto> users) {
+        return new UserListingDto(users);
     }
 }

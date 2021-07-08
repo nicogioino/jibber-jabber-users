@@ -25,8 +25,8 @@ public class UserController {
     }
 
     @GetMapping("/get-all")
-    public UserListingDto getAllUsers() {
-        return userService.getAllUsers();
+    public UserListingDto getAllUsers( @RequestHeader("userId") String userId) {
+        return userService.getAllUsers(userId);
     }
 
     @PostMapping("/register")

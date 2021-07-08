@@ -7,6 +7,7 @@ import com.austral.jibberjabberusers.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -40,9 +41,15 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserListingDto getAllUsers() {
+    public UserListingDto getAllUsers(String userId) {
+        AppUser appUser = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("User not found"));
         List<AppUser> appUsers = userRepository.findAll();
-        return UserListingDto.fromUsersList(appUsers);
+        List<ReducedUserWithFollowingDto> users = new ArrayList<>();
+        for (AppUser appuser: appUsers) {
+            boolean isFollowing = appuser.getFollowing().contains(appuser.getId());
+            users.add(ReducedUserWithFollowingDto.fromUser(appUser,isFollowing));
+        }
+        return UserListingDto.fromUsersList(users);
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface UserService {
 
     ReducedUserDto getUserById(String userId);
 
-    UserListingDto getAllUsers();
+    UserListingDto getAllUsers(String userId);
 
     ReducedUserDto editUser(ReducedUserDto editUserDto, String userId);
 
